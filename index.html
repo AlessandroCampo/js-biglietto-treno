@@ -17,16 +17,16 @@
     <label for="starting-station"> Seleziona stazione di partenza:</label>
     <select name="departure" id="starting-station">
         <option value="Milano">Milano</option>
-        <option value="Torino">Torino</option>
+        <option value="Torino">Bologna</option>
         <option value="Roma">Roma</option>
         <option value="Napoli">Napoli</option>
         <option value="Villa S.Giovanni">Villa S.Giovanni</option>
     </select>
 
-    <label for="arriving-station"> Seleziona stazione di partenza:</label>
+    <label for="arriving-station"> Seleziona stazione di arrivo:</label>
     <select name="arrival" id="arriving-station">
         <option value="Milano">Milano</option>
-        <option value="Torino">Torino</option>
+        <option value="Torino">Bologna</option>
         <option value="Roma">Roma</option>
         <option value="Napoli">Napoli</option>
         <option value="Villa S.Giovanni">Villa S.Giovanni</option>
@@ -37,10 +37,16 @@
     <label for="departure-time"> Seleziona un orario di partenza:</label>
     <input type="time" name="departure-time" id="departure-time">
 
-    <label for="passenger_number"> Seleziona il numero di passeggeri:</label>
-    <i class="fa-solid fa-circle-plus"></i>
+    <label for="passenger_number"> Seleziona il numero di passeggeri adulti:</label>
+    <i class="fa-solid fa-circle-plus" id="plus"></i>
     <input type="text" name="passenger_number" id="passenger_number" value="1" disabled style="width: 50px">
-    <i class="fa-solid fa-circle-minus"></i>
+    <i class="fa-solid fa-circle-minus" id="minus"></i>
+
+    <label for="elder_number"> Seleziona il numero di passeggeri anziani (over65):</label>
+    <i class="fa-solid fa-circle-plus" id="elder_plus"></i>
+    <input type="text" name="elder_number" id="elder_number" value="0" disabled style="width: 50px">
+    <i class="fa-solid fa-circle-minus" id="elder_minus"></i>
+
 
 
     <div class="slidecontainer">
@@ -55,8 +61,15 @@
         <li>
             Distanza: <span id="distance_travelled"></span>
         </li>
-        <li></li>
-        <li></li>
+        <li>
+            Numero passeggeri: <span id="passengers_number"></span>
+        </li>
+        <li>
+            Prezzo: <span id="ticket_price"></span>
+        </li>
+        <li>
+            Orari disponibili: <span id="hours"></span>
+        </li>
     </ul>
 
 
