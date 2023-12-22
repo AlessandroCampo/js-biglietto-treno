@@ -17,7 +17,7 @@
     <label for="starting-station"> Seleziona stazione di partenza:</label>
     <select name="departure" id="starting-station">
         <option value="Milano">Milano</option>
-        <option value="Torino">Bologna</option>
+        <option value="Bologna">Bologna</option>
         <option value="Roma">Roma</option>
         <option value="Napoli">Napoli</option>
         <option value="Villa S.Giovanni">Villa S.Giovanni</option>
@@ -26,7 +26,7 @@
     <label for="arriving-station"> Seleziona stazione di arrivo:</label>
     <select name="arrival" id="arriving-station">
         <option value="Milano">Milano</option>
-        <option value="Torino">Bologna</option>
+        <option value="Bologna">Bologna</option>
         <option value="Roma">Roma</option>
         <option value="Napoli">Napoli</option>
         <option value="Villa S.Giovanni">Villa S.Giovanni</option>
@@ -35,7 +35,15 @@
     <label for="date"> Inserisci una data di partenza:</label>
     <input type="date" name="date" id="date">
     <label for="departure-time"> Seleziona un orario di partenza:</label>
-    <input type="time" name="departure-time" id="departure-time">
+    <select name="departure-time" id="departure-time">
+        <option value="7:30">7:30</option>
+        <option value="9:00">9:00</option>
+        <option value="10:30">10:30</option>
+        <option value="12:00">12:00</option>
+        <option value="15:00">15:00</option>
+        <option value="18:30">18:30</option>
+        <option value="20:00">20:00</option>
+    </select>
 
     <label for="passenger_number"> Seleziona il numero di passeggeri adulti:</label>
     <i class="fa-solid fa-circle-plus" id="plus"></i>
@@ -68,7 +76,10 @@
             Prezzo: <span id="ticket_price"></span>
         </li>
         <li>
-            Orari disponibili: <span id="hours"></span>
+            Oraro di partenza: <span id="hours"></span>
+        </li>
+        <li>
+            Oraro di arrivo: <span id="hours"></span>
         </li>
     </ul>
 

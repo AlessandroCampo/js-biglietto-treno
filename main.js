@@ -1,24 +1,24 @@
 const milan = {
     latitude: 45.4654219,
     longitude: 9.1859243,
-    departure_times: ["06:12", "09:38", "12:15", "18:03"]
+
 }
 
 const bologna = {
     latitude: 44.494887,
     longitude: 11.3426163,
-
 }
 
 const rome = {
     latitude: 41.9027835,
-    longitude: 12.4963655
+    longitude: 12.4963655,
+
 }
 
 
 const naples = {
     latitude: 40.8517746,
-    longitude: 14.2681244
+    longitude: 14.2681244,
 }
 
 
@@ -45,7 +45,9 @@ const price_multiplier = 0.21;
 let button = document.getElementById("button")
 let starting_station = document.getElementById("starting-station")
 let arrival_station = document.getElementById("arriving-station")
+let date_selector = document.getElementById("name")
 let dep_time = document.getElementById("departure-time")
+let dep_day = document.getElementById("date")
 let distance_info = document.getElementById("distance_travelled")
 let passengers_info = document.getElementById("passengers_number")
 let hours_info = document.getElementById("hours")
@@ -59,6 +61,15 @@ let elder_number = 0;
 let passengers_number_selection = document.getElementById("passenger_number")
 let elders_number_selection = document.getElementById("elder_number")
 let availableTimes = []
+let currentDate = new Date()
+let todayDate = currentDate.getDate()
+let todayMonth = currentDate.getMonth()
+let todayYear = currentDate.getFullYear()
+let currentFullDate = `${todayYear}-${todayMonth + 1}-${todayDate}`;
+let currentFullDateNextYear = `${todayYear + 1}-${todayMonth + 1}-${todayDate}`;
+dep_day.setAttribute("min", currentFullDate)
+dep_day.setAttribute("max", currentFullDateNextYear)
+
 
 function degreesToRadians(degrees) {
     var radians = (degrees * Math.PI) / 180;
@@ -105,7 +116,6 @@ minus_elder_button.addEventListener("click", () => {
 })
 
 button.addEventListener("click", () => {
-    availableTimes = []
 
     if (starting_station.value == "Napoli") {
         startCoords.latitude = naples.latitude
@@ -125,14 +135,6 @@ button.addEventListener("click", () => {
     else if (starting_station.value == "Milano") {
         startCoords.latitude = milan.latitude
         startCoords.longitude = milan.longitude
-        console.log(dep_time.value)
-        milan.departure_times.forEach((time) => {
-            if (time > dep_time.value) {
-                availableTimes.push(time)
-                console.log(availableTimes)
-            }
-
-        })
     }
 
     else if (starting_station.value == "Villa S.Giovanni") {
@@ -168,16 +170,66 @@ button.addEventListener("click", () => {
         alert("le stazioni di partenza e di arrivo non possono coincidere")
     }
 
-    milan.departure_times.forEach
-    console.log(startCoords.latitude)
+    if ((starting_station.value == "Milano") && (arrival_station.value == "Bologna") ||
+        (starting_station.value == "Bologna") && (arrival_station.value == "Milano")) {
+        console.log("bologna-milano")
+    }
+
+    if ((starting_station.value == "Milano") && (arrival_station.value == "Roma") ||
+        (starting_station.value == "Roma") && (arrival_station.value == "Milano")) {
+        console.log("roma-milano")
+    }
+
+    if ((starting_station.value == "Milano") && (arrival_station.value == "Napoli") ||
+        (starting_station.value == "Napoli") && (arrival_station.value == "Milano")) {
+        console.log("napoli-milano")
+    }
+
+    if ((starting_station.value == "Milano") && (arrival_station.value == "Villa S.Giovanni") ||
+        (starting_station.value == "Villa S.Giovanni") && (arrival_station.value == "Milano")) {
+        console.log("villa-milano")
+    }
+
+    if ((starting_station.value == "Bologna") && (arrival_station.value == "Roma") ||
+        (starting_station.value == "Roma") && (arrival_station.value == "Bologna")) {
+        console.log("bolo-roma")
+    }
+
+    if ((starting_station.value == "Bologna") && (arrival_station.value == "Napoli") ||
+        (starting_station.value == "Napoli") && (arrival_station.value == "Bologna")) {
+        console.log("bolo-napoli")
+    }
+
+    if ((starting_station.value == "Bologna") && (arrival_station.value == "Villa S.Giovanni") ||
+        (starting_station.value == "Villa S.Giovanni") && (arrival_station.value == "Bologna")) {
+        console.log("bolo-villa")
+    }
+
+    if ((starting_station.value == "Roma") && (arrival_station.value == "Napoli") ||
+        (starting_station.value == "Napoli") && (arrival_station.value == "Roma")) {
+        console.log("roma-napoli")
+    }
+
+    if ((starting_station.value == "Roma") && (arrival_station.value == "Villa S.Giovanni") ||
+        (starting_station.value == "Villa S.Giovanni") && (arrival_station.value == "Roma")) {
+        console.log("roma-vila")
+    }
+
+    if ((starting_station.value == "Napoli") && (arrival_station.value == "Villa S.Giovanni") ||
+        (starting_station.value == "Villa S.Giovanni") && (arrival_station.value == "Napoli")) {
+        console.log("villa-napoli")
+    }
+
+
+
     calcDistance()
+    hours_info.innerText = dep_time.value
 
 
 
 })
 
 function calcDistance() {
-    console.log(startCoords.latitude)
     let startingLat = degreesToRadians(startCoords.latitude);
     let startingLong = degreesToRadians(startCoords.longitude);
     let destinationLat = degreesToRadians(arrivalCoords.latitude);
@@ -195,6 +247,6 @@ function calcDistance() {
     distance_info.innerText = myDistance + " km"
     passengers_info.innerText = passenger_number + " passeggeri adulti " + elder_number + " passeggeri anziani"
     price_info.innerText = ((myDistance * price_multiplier) * (passenger_number + (elder_number * 4 / 10))).toFixed(2) + " euro"
-    hours_info.innerText = availableTimes
+
 
 }
