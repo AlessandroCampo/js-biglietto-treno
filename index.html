@@ -35,15 +35,7 @@
     <label for="date"> Inserisci una data di partenza:</label>
     <input type="date" name="date" id="date">
     <label for="departure-time"> Seleziona un orario di partenza:</label>
-    <select name="departure-time" id="departure-time">
-        <option value="7:30">7:30</option>
-        <option value="9:00">9:00</option>
-        <option value="10:30">10:30</option>
-        <option value="12:00">12:00</option>
-        <option value="15:00">15:00</option>
-        <option value="18:30">18:30</option>
-        <option value="20:00">20:00</option>
-    </select>
+    <input type="time" name="departure-time" id="departure-time">
 
     <label for="passenger_number"> Seleziona il numero di passeggeri adulti:</label>
     <i class="fa-solid fa-circle-plus" id="plus"></i>
@@ -57,10 +49,10 @@
 
 
 
-    <div class="slidecontainer">
+    <!-- <div class="slidecontainer">
         <label for="myRange"> Solo andata: </label>
         <input type="range" min="1" max="2" value="51" class="slider" id="myRange" style="width: 50px">
-    </div>
+    </div> -->
     <button id="button">
         Genera biglietto
     </button>
@@ -73,15 +65,28 @@
             Numero passeggeri: <span id="passengers_number"></span>
         </li>
         <li>
-            Prezzo: <span id="ticket_price"></span>
+            Prezzo Totale: <span id="ticket_price"></span>
         </li>
-        <li>
-            Oraro di partenza: <span id="hours"></span>
-        </li>
-        <li>
-            Oraro di arrivo: <span id="hours"></span>
-        </li>
+
     </ul>
+
+    <table class="table d-none text-center" id="trains">
+        <thead>
+            <tr>
+                <th scope="col">Stazione Partenza- Arrivo</th>
+                <th scope="col">Orario Partenza - Arrivo </th>
+                <th scope="col">Durata Viaggio</th>
+                <th scope="col">Data di partenza:</th>
+                <th scope="col">Prezzo totale per tutti i passegeri:</th>
+
+            </tr>
+        </thead>
+        <tbody id="table_body" class="fw-light">
+
+        </tbody>
+    </table>
+
+
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
