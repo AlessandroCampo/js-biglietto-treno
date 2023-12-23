@@ -42,10 +42,10 @@
     <input type="text" name="passenger_number" id="passenger_number" value="1" disabled style="width: 50px">
     <i class="fa-solid fa-circle-minus" id="minus"></i>
 
-    <label for="elder_number"> Seleziona il numero di passeggeri anziani (over65):</label>
+    <!-- <label for="elder_number"> Seleziona il numero di passeggeri anziani (over65):</label>
     <i class="fa-solid fa-circle-plus" id="elder_plus"></i>
     <input type="text" name="elder_number" id="elder_number" value="0" disabled style="width: 50px">
-    <i class="fa-solid fa-circle-minus" id="elder_minus"></i>
+    <i class="fa-solid fa-circle-minus" id="elder_minus"></i> -->
 
 
 
@@ -54,7 +54,7 @@
         <input type="range" min="1" max="2" value="51" class="slider" id="myRange" style="width: 50px">
     </div> -->
     <button id="button">
-        Genera biglietto
+        Cerca
     </button>
 
     <ul>
@@ -85,6 +85,55 @@
 
         </tbody>
     </table>
+
+    <div id="form-container">
+        <form class="w-50 p-3 d-none">
+            <div class="form-group py-3">
+                <label for="passenger_mail">Indirizzo Email</label>
+                <input type="email" class="form-control" id="passenger_mail" placeholder="Enter email">
+            </div>
+            <div class="form-group py-3">
+                <label for="passenger_fname">Nome Passeggero</label>
+                <input type="text" class="form-control" id="passenger_fname" placeholder="Nome">
+            </div>
+            <div class="form-group py-3">
+                <label for="passenger_lname">Cognome Passeggero</label>
+                <input type="text" class="form-control" id="passenger_lname" placeholder="Cognome">
+            </div>
+
+            <div class="form-group w-50 py-3">
+                <label for="passenger_birth_date">Data di nascita del passeggero (per i passeggeri over 65 è previsto
+                    uno
+                    sconto del 40%. Per i passeggeri minorenni, uno sconto del 20%) </label>
+                <input type="date" class="form-control" id="passenger_birth_date" placeholder="Cognome">
+            </div>
+
+            <div class="form-group w-50 py-3">
+                <label for="ticket_class">Scegli la classe piu' adatta alle tue esigenze</label>
+                <select type="" class="form-control" id="ticket_class">
+                    <option value="economy">
+                        Economy Class
+                    </option>
+
+                    <option value="business">
+                        Business Class (+25% sul prezzo base del biglietto)
+                    </option>
+
+                    <option value="premium">
+                        Premium Class (+50% sul prezzo base del biglietto)
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-check py-3">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
 
 
 
