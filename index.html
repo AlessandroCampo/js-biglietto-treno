@@ -37,10 +37,10 @@
     <label for="departure-time"> Seleziona un orario di partenza:</label>
     <input type="time" name="departure-time" id="departure-time">
 
-    <label for="passenger_number"> Seleziona il numero di passeggeri adulti:</label>
+    <!-- <label for="passenger_number"> Seleziona il numero di passeggeri:</label>
     <i class="fa-solid fa-circle-plus" id="plus"></i>
     <input type="text" name="passenger_number" id="passenger_number" value="1" disabled style="width: 50px">
-    <i class="fa-solid fa-circle-minus" id="minus"></i>
+    <i class="fa-solid fa-circle-minus" id="minus"></i> -->
 
     <!-- <label for="elder_number"> Seleziona il numero di passeggeri anziani (over65):</label>
     <i class="fa-solid fa-circle-plus" id="elder_plus"></i>
@@ -57,18 +57,30 @@
         Cerca
     </button>
 
-    <ul>
-        <li>
-            Distanza: <span id="distance_travelled"></span>
-        </li>
-        <li>
-            Numero passeggeri: <span id="passengers_number"></span>
-        </li>
-        <li>
-            Prezzo Totale: <span id="ticket_price"></span>
-        </li>
+    <div class="recap mt-4">
+        <h3>
+            RECAP DETTAGLI TRENO:
+        </h3>
+        <ul>
+            <li>
+                Tratta selezionata: <span id="path"></span>
+            </li>
+            <li>
+                Orario selezionato: <span id="chosen_time"></span>
+            </li>
+            <li>
+                Distanza: <span id="distance_travelled"></span>
+            </li>
+            <!-- <li>
+                Numero passeggeri: <span id="passengers_number"></span>
+            </li> -->
+            <li class="fw-bold fs-4">
+                Prezzo biglietto: <span id="ticket_price"></span>
+            </li>
 
-    </ul>
+        </ul>
+    </div>
+
 
     <table class="table d-none text-center" id="trains">
         <thead>
@@ -77,7 +89,7 @@
                 <th scope="col">Orario Partenza - Arrivo </th>
                 <th scope="col">Durata Viaggio</th>
                 <th scope="col">Data di partenza:</th>
-                <th scope="col">Prezzo totale per tutti i passegeri:</th>
+                <th scope="col">Prezzo:</th>
 
             </tr>
         </thead>
@@ -88,6 +100,7 @@
 
     <div id="form-container">
         <form class="w-50 p-3 d-none">
+            <h3> Inserire i dati del passeggero: </h3>
             <div class="form-group py-3">
                 <label for="passenger_mail">Indirizzo Email</label>
                 <input type="email" class="form-control" id="passenger_mail" placeholder="Enter email">
@@ -102,10 +115,11 @@
             </div>
 
             <div class="form-group w-50 py-3">
-                <label for="passenger_birth_date">Data di nascita del passeggero (per i passeggeri over 65 è previsto
+                <label for="passenger_birth_date" class="mb-2">Data di nascita del passeggero (per i passeggeri over 65
+                    è previsto
                     uno
                     sconto del 40%. Per i passeggeri minorenni, uno sconto del 20%) </label>
-                <input type="date" class="form-control" id="passenger_birth_date" placeholder="Cognome">
+                <input type="date" class="form-control" id="passenger_birth_date" min="1920-01-02">
             </div>
 
             <div class="form-group w-50 py-3">
@@ -125,12 +139,14 @@
                 </select>
             </div>
 
+
+
             <div class="form-check py-3">
                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
                 <label class="form-check-label" for="exampleCheck1">Check me out</label>
             </div>
 
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Conferma i dati e vai all'acquisto</button>
         </form>
     </div>
 

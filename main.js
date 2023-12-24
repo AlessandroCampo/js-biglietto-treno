@@ -49,16 +49,19 @@ let date_selector = document.getElementById("name")
 let dep_time = document.getElementById("departure-time")
 let dep_day = document.getElementById("date")
 let distance_info = document.getElementById("distance_travelled")
-let passengers_info = document.getElementById("passengers_number")
+// let passengers_info = document.getElementById("passengers_number")
 let hours_info = document.getElementById("hours")
 let price_info = document.getElementById("ticket_price")
-let plus_button = document.getElementById("plus")
-let minus_button = document.getElementById("minus")
+let path_info = document.getElementById("path")
+let hour_info = document.getElementById("chosen_time")
+// let plus_button = document.getElementById("plus")
+// let minus_button = document.getElementById("minus")
 // let plus_elder_button = document.getElementById("elder_plus")
 // let minus_elder_button = document.getElementById("elder_minus")
-let passenger_number = 1;
+// let passenger_number = 1;
 // let elder_number = 0;
-let passengers_number_selection = document.getElementById("passenger_number")
+// let passengers_number_selection = document.getElementById("passenger_number")
+let trains_table = document.getElementById("trains")
 let elders_number_selection = document.getElementById("elder_number")
 let availableTimes = []
 let currentDate = new Date()
@@ -69,6 +72,7 @@ let currentFullDate = `${todayYear}-${todayMonth + 1}-${todayDate}`;
 let currentFullDateNextYear = `${todayYear + 1}-${todayMonth + 1}-${todayDate}`
 let dep_hours = ["8:00", "9:17", "11:05", "13:30", "15:12", "17:00", "18:45", "19:30", "20:55", "22:04"]
 let time_distance = "0:00"
+let ticket_price = 0
 let passenger_birth_date = document.getElementById("passenger_birth_date")
 dep_day.setAttribute("min", currentFullDate)
 dep_day.setAttribute("max", currentFullDateNextYear)
@@ -87,24 +91,24 @@ function degreesToRadians(degrees) {
 
 
 
-plus_button.addEventListener("click", () => {
-    if (passenger_number < 5) {
-        passenger_number++;
-        passengers_number_selection.value = passenger_number
-    }
+// plus_button.addEventListener("click", () => {
+//     if (passenger_number < 5) {
+//         passenger_number++;
+//         passengers_number_selection.value = passenger_number
+//     }
 
-    else {
-        alert("il numero massimo di biglietti acquistabilli in una singola sessione è 5")
-    }
+//     else {
+//         alert("il numero massimo di biglietti acquistabilli in una singola sessione è 5")
+//     }
 
-})
+// })
 
-minus_button.addEventListener("click", () => {
-    if (passenger_number > 0) {
-        passenger_number--;
-        passengers_number_selection.value = passenger_number
-    }
-})
+// minus_button.addEventListener("click", () => {
+//     if (passenger_number > 0) {
+//         passenger_number--;
+//         passengers_number_selection.value = passenger_number
+//     }
+// })
 
 // plus_elder_button.addEventListener("click", () => {
 //     if (passenger_number + elder_number < 10) {
@@ -216,8 +220,10 @@ function calcDistance() {
 
     let myDistance = Math.floor(distanceInKilometers)
     distance_info.innerText = myDistance + " km"
-    passengers_info.innerText = passenger_number + " passeggeri "
-    price_info.innerText = ((myDistance * price_multiplier) * (passenger_number)).toFixed(2) + " euro"
+    ticket_price = myDistance * price_multiplier
+    price_info.innerText = (myDistance * price_multiplier).toFixed(2) + " euro"
+    path_info.innerText = `${starting_station.value} - ${arrival_station.value}`
+
 
 
 }
@@ -276,26 +282,21 @@ function checkTravelTime() {
 }
 
 function generateForm() {
-    console.log("ciao")
-    let form_container = document.getElementById("form-container")
+    trains_table.classList.add("d-none")
+    let class_selection = document.getElementById("ticket_class")
+    let birth_date_selection = document.getElementById("passenger_birth_date")
     let form = document.querySelector("form")
+    hour_info.innerText = event.target.getAttribute("data-ticket_time")
+    form.classList.remove("d-none")
+    class_selection.addEventListener("change", calcPrice)
+    birth_date_selection.addEventListener("change", calcPrice)
 
-    console.log(passenger_number)
-    for (i = 0; i < (passenger_number); i++) {
-        let form_clone = form.cloneNode(true)
-        let form_title = document.createElement("h3")
-        form_clone.classList.remove("d-none")
-        form_title.innerText = `Inserire i dati del passeggero ${i + 1}`
-        form_container.appendChild(form_clone)
-        form_container.insertBefore(form_title, form_clone)
-
-    }
 }
 
 function generateTimeTables() {
     let trs = document.querySelectorAll(".train")
     let table_body = document.getElementById("table_body")
-    let trains_table = document.getElementById("trains")
+    let displayed_solutions = 0;
     trains_table.classList.remove("d-none")
     trs.forEach((tr) => table_body.removeChild(tr))
 
@@ -346,9 +347,11 @@ function generateTimeTables() {
         let select_button = document.createElement("button")
 
 
+
         train.className = "train"
 
-        if (Number(dep_time.value.split(":")[0]) < Number(hour.split(":")[0])) {
+        function display_timetable() {
+            displayed_solutions++;
             start_arrive.innerText = `${starting_station.value} - ${arrival_station.value}`
             time_dep_arr.innerText = `${hour} - ${final_time}`
             duration.innerText = time_distance
@@ -368,7 +371,92 @@ function generateTimeTables() {
             train.appendChild(select)
         }
 
+        if (Number(dep_time.value.split(":")[0]) < Number(hour.split(":")[0])) {
+            display_timetable()
+        }
+
 
 
     })
+    if (displayed_solutions == 0) {
+        alert("Non sono disponibili treni dopo l'orario da te indicato. Prova a modificare la data o l'orario di partenza")
+    }
 }
+
+function calcPrice() {
+
+    let class_selection = document.getElementById("ticket_class")
+    let birth_date_selection = document.getElementById("passenger_birth_date")
+    let ticket_class = class_selection.value
+    let passenger_birth_date = birth_date_selection.value
+    let starting_ticket_price = ticket_price
+    let final_ticket_price
+    let passenger_birth_year = passenger_birth_date.split("-")[0]
+
+    console.log(event.target)
+
+    if (event.target == class_selection) {
+        switch (ticket_class) {
+            case "economy":
+                final_ticket_price = starting_ticket_price
+                if ((todayYear - passenger_birth_year < 18 && !passenger_birth_date == "")) {
+                    final_ticket_price = final_ticket_price * 0.8
+                }
+
+                else if ((todayYear - passenger_birth_year > 65 && !passenger_birth_date == "")) {
+                    final_ticket_price = final_ticket_price * 0.6
+                }
+                price_info.innerText = final_ticket_price.toFixed(2)
+                break;
+
+            case "business":
+                final_ticket_price = starting_ticket_price * 1.25
+                if ((todayYear - passenger_birth_year < 18 && !passenger_birth_date == "")) {
+                    final_ticket_price = final_ticket_price * 0.8
+                }
+
+                else if ((todayYear - passenger_birth_year > 65 && !passenger_birth_date == "")) {
+                    final_ticket_price = final_ticket_price * 0.6
+                }
+                price_info.innerText = final_ticket_price.toFixed(2)
+                break;
+
+            case "premium":
+                final_ticket_price = starting_ticket_price * 1.5
+                if ((todayYear - passenger_birth_year < 18 && !passenger_birth_date == "")) {
+                    final_ticket_price = final_ticket_price * 0.8
+                }
+
+                else if ((todayYear - passenger_birth_year > 65 && !passenger_birth_date == "")) {
+                    final_ticket_price = final_ticket_price * 0.6
+                }
+                price_info.innerText = final_ticket_price.toFixed(2)
+                break;
+        }
+
+    }
+
+    else if (event.target == birth_date_selection) {
+        if ((todayYear - passenger_birth_year < 18 && !passenger_birth_date == "")) {
+            alert("è stato applicato lo sconto del 20% per i passeggeri minorenni")
+            final_ticket_price = starting_ticket_price * 0.8
+            price_info.innerText = final_ticket_price.toFixed(2)
+        }
+
+        else if ((todayYear - passenger_birth_year > 65 && !passenger_birth_date == "")) {
+            alert("è stato applicato lo sconto del 40% per i passeggeri over 65")
+            final_ticket_price = starting_ticket_price * 0.6
+            price_info.innerText = final_ticket_price.toFixed(2)
+        }
+
+        else {
+            final_ticket_price = starting_ticket_price
+            price_info.innerText = final_ticket_price.toFixed(2)
+        }
+
+    }
+
+
+
+}
+
