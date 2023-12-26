@@ -74,9 +74,11 @@ let dep_hours = ["8:00", "9:17", "11:05", "13:30", "15:12", "17:00", "18:45", "1
 let time_distance = "0:00"
 let ticket_price = 0
 let passenger_birth_date = document.getElementById("passenger_birth_date")
+let submit_button = document.getElementById("submit")
 dep_day.setAttribute("min", currentFullDate)
 dep_day.setAttribute("max", currentFullDateNextYear)
 passenger_birth_date.setAttribute("max", currentFullDate)
+let selected_date = ""
 
 
 
@@ -220,8 +222,8 @@ function calcDistance() {
 
     let myDistance = Math.floor(distanceInKilometers)
     distance_info.innerText = myDistance + " km"
-    ticket_price = myDistance * price_multiplier
-    price_info.innerText = (myDistance * price_multiplier).toFixed(2) + " euro"
+    ticket_price = (myDistance * price_multiplier).toFixed(2)
+    price_info.innerText = ticket_price + " euro"
     path_info.innerText = `${starting_station.value} - ${arrival_station.value}`
 
 
@@ -286,10 +288,58 @@ function generateForm() {
     let class_selection = document.getElementById("ticket_class")
     let birth_date_selection = document.getElementById("passenger_birth_date")
     let form = document.querySelector("form")
+
+    let ticket_img = document.getElementById("ticket_img")
+    let ticket_img_name = document.getElementById("full_name")
+    let ticket_img_name2 = document.getElementById("full_name2")
+    let ticket_img_type = document.getElementById("ticket_type")
+    let ticket_img_date = document.getElementById("ticket_date")
+    let ticket_img_dep1 = document.getElementById("ticket_dep")
+    let ticket_img_arr1 = document.getElementById("ticket_arr")
+    let ticket_img_dep2 = document.getElementById("ticket_dep2")
+    let ticket_img_arr2 = document.getElementById("ticket_arr2")
+    let ticket_img_deptime = document.getElementById("ticket_deptime")
+    let ticket_img_arrtime = document.getElementById("ticket_arrtime")
+    let ticket_img_price = document.getElementById("ticket_pricing")
+    let ticket_img_carriage = document.getElementById("ticket_carriage")
+    let ticket_img_carriage2 = document.getElementById("ticket_carriage2")
+    let ticket_img_seat = document.getElementById("ticket_seat")
+    let ticket_img_seat2 = document.getElementById("ticket_seat2")
     hour_info.innerText = event.target.getAttribute("data-ticket_time")
     form.classList.remove("d-none")
     class_selection.addEventListener("change", calcPrice)
     birth_date_selection.addEventListener("change", calcPrice)
+    form.addEventListener("submit", (e) => {
+        let passenger_name = document.getElementById("passenger_fname").value
+        let passenger_lname = document.getElementById("passenger_lname").value
+        let selected_class = document.getElementById("ticket_class").value
+        e.preventDefault()
+        console.log("ciao")
+        form.classList.add("d-none")
+        ticket_img.classList.remove("d-none")
+        ticket_img_name.innerText = `${passenger_name} ${passenger_lname}`
+        ticket_img_name2.innerText = `${passenger_name} ${passenger_lname}`
+        ticket_img_type.innerText = selected_class
+        ticket_img_date.innerText = selected_date
+        ticket_img_dep1.innerText = path_info.innerText.split("-")[0]
+        ticket_img_arr1.innerText = path_info.innerText.split("-")[1]
+        ticket_img_dep2.innerText = path_info.innerText.split("-")[0]
+        ticket_img_arr2.innerText = path_info.innerText.split("-")[1]
+        ticket_img_deptime.innerText = hour_info.innerText.split("-")[0]
+        ticket_img_arrtime.innerText = hour_info.innerText.split("-")[1]
+        ticket_img_price.innerText = price_info.innerText
+        console.log(price_info.innerText)
+        let random_carriage = Math.floor(Math.random() * 15) + 1
+        let letters = ["A", "B", "C", "D", "E", "F"]
+        let random_letter = letters[Math.floor(Math.random() * letters.length)]
+        let random_seat = `${random_letter}${Math.floor(Math.random() * 130)}`
+        ticket_img_carriage.innerText = random_carriage
+        ticket_img_carriage2.innerText = random_carriage
+        ticket_img_seat.innerText = random_seat
+        ticket_img_seat2.innerText = random_seat
+
+
+    })
 
 }
 
@@ -352,6 +402,7 @@ function generateTimeTables() {
 
         function display_timetable() {
             displayed_solutions++;
+            selected_date = dep_day.value
             start_arrive.innerText = `${starting_station.value} - ${arrival_station.value}`
             time_dep_arr.innerText = `${hour} - ${final_time}`
             duration.innerText = time_distance

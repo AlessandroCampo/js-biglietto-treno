@@ -103,15 +103,15 @@
             <h3> Inserire i dati del passeggero: </h3>
             <div class="form-group py-3">
                 <label for="passenger_mail">Indirizzo Email</label>
-                <input type="email" class="form-control" id="passenger_mail" placeholder="Enter email">
+                <input type="email" class="form-control" id="passenger_mail" placeholder="Enter email" required>
             </div>
             <div class="form-group py-3">
                 <label for="passenger_fname">Nome Passeggero</label>
-                <input type="text" class="form-control" id="passenger_fname" placeholder="Nome">
+                <input type="text" class="form-control" id="passenger_fname" placeholder="Nome" required>
             </div>
             <div class="form-group py-3">
                 <label for="passenger_lname">Cognome Passeggero</label>
-                <input type="text" class="form-control" id="passenger_lname" placeholder="Cognome">
+                <input type="text" class="form-control" id="passenger_lname" placeholder="Cognome" required>
             </div>
 
             <div class="form-group w-50 py-3">
@@ -119,7 +119,7 @@
                     è previsto
                     uno
                     sconto del 40%. Per i passeggeri minorenni, uno sconto del 20%) </label>
-                <input type="date" class="form-control" id="passenger_birth_date" min="1920-01-02">
+                <input type="date" class="form-control" id="passenger_birth_date" min="1920-01-02" required>
             </div>
 
             <div class="form-group w-50 py-3">
@@ -142,11 +142,11 @@
 
 
             <div class="form-check py-3">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
                 <label class="form-check-label" for="exampleCheck1">Check me out</label>
             </div>
 
-            <button type="submit" class="btn btn-primary">Conferma i dati e vai all'acquisto</button>
+            <button type="submit" id="submit" class="btn btn-primary">Conferma i dati e genera il biglietto</button>
         </form>
     </div>
 
@@ -158,6 +158,74 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
     <script src="main.js"></script>
+
+    <figure class="d-none" id="ticket_img">
+        <img src="img/Blank-Train-Ticket-Template-2.jpg" alt="">
+        <p id="full_name">
+            Alessandro Campo
+        </p>
+        <p id="full_name2">
+            Alessandro Campo
+        </p>
+        <p id="ticket_type">
+            Economy Class
+        </p>
+
+        <p id="ticket_dep">
+            London
+        </p>
+
+        <p id="ticket_arr">
+            London
+        </p>
+
+        <p id="ticket_dep2">
+            London
+        </p>
+
+        <p id="ticket_arr2">
+            London
+        </p>
+
+        <p id="ticket_date">
+            2023-12-11
+        </p>
+
+        <p id="ticket_deptime">
+            11:00
+        </p>
+        <p id="ticket_arrtime">
+            11:00
+        </p>
+
+
+        <p id="ticket_pricing">
+            30€
+        </p>
+
+        <p id="ticket_number">
+            F124352
+        </p>
+
+        <p id="ticket_seat">
+            A18
+        </p>
+
+        <p id="ticket_number2">
+            F124352
+        </p>
+
+        <p id="ticket_seat2">
+            A18
+        </p>
+        <p id="ticket_carriage">
+            12
+        </p>
+
+        <p id="ticket_carriage2">
+            12
+        </p>
+    </figure>
 
 
 </body>
