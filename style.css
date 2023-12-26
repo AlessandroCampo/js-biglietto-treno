@@ -1,3 +1,27 @@
+header,
+#button {
+    background-color: rgb(46, 130, 158);
+}
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+}
+
+.carousel-inner img {
+    height: 600px;
+}
+
+.carousel-inner h2 {
+    transform: translate(-50%, -50%);
+}
+
+
+
+
+
 #passenger_number {
     background-image: url(img/user-solid.svg);
     background-repeat: no-repeat;

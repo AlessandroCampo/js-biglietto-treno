@@ -4,60 +4,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="style.css">
-    <title>Trenitaly</title>
+    <title>ITRAINS</title>
 </head>
 
+<header class="py-2">
+    <nav class="navbar w-75 mx-auto d-flex gap-3 justify-content-between align-items-center">
+        <figure style="width: fit-content;" class="align-self-center">
+            <img src="img/logo-removebg-preview.png" alt="">
+        </figure>
+        <ul class="d-flex gap-3 list-unstyled align-items-center">
+            <li>
+                <a href="" class="text-decoration-none text-light"> CHI SIAMO </a>
+            </li>
+            <li>
+                <a href="" class="text-decoration-none text-light"> DESTINAZIONI E ORARI </a>
+            </li>
+            <li>
+                <a href="" class="text-decoration-none text-light"> OFFERTE </a>
+            </li>
+            <li>
+                <a href="" class="text-decoration-none text-light"> SERVIZI </a>
+            </li>
+            <li>
+                <a href="" class="text-decoration-none text-light"> FIDELTY CARD </a>
+            </li>
+        </ul>
+
+        <button class="btn text-white border rounded-4 p-2 mb-3">
+            <i class="fa-solid fa-user"></i>
+            <span>Accedi</span>
+        </button>
+    </nav>
+</header>
+
 <body>
-    <label for="starting-station"> Seleziona stazione di partenza:</label>
-    <select name="departure" id="starting-station">
-        <option value="Milano">Milano</option>
-        <option value="Bologna">Bologna</option>
-        <option value="Roma">Roma</option>
-        <option value="Napoli">Napoli</option>
-        <option value="Villa S.Giovanni">Villa S.Giovanni</option>
-    </select>
+    <div class="container py-5 d-flex justify-content-center gap-3">
+        <div class="d-flex align-items-center gap-2">
+            <div class="border rounded border-dark-subtle p-2 " style="width: fit-content;">
+                <span class="fw-bold fs-5 me-2">DA</span>
+                <select name="departure" id="starting-station" class="border-0 fs-5">
+                    <option value="" disabled selected class="text-white">Inserisci città</option>
+                    <option value="Milano">Milano</option>
+                    <option value="Bologna">Bologna</option>
+                    <option value="Roma">Roma</option>
+                    <option value="Napoli">Napoli</option>
+                    <option value="Villa S.Giovanni">Villa S.Giovanni</option>
+                </select>
+            </div>
 
-    <label for="arriving-station"> Seleziona stazione di arrivo:</label>
-    <select name="arrival" id="arriving-station">
-        <option value="Milano">Milano</option>
-        <option value="Bologna">Bologna</option>
-        <option value="Roma">Roma</option>
-        <option value="Napoli">Napoli</option>
-        <option value="Villa S.Giovanni">Villa S.Giovanni</option>
-    </select>
+            <i class="fa-solid fa-arrow-right-arrow-left" id="switch"></i>
 
-    <label for="date"> Inserisci una data di partenza:</label>
-    <input type="date" name="date" id="date">
-    <label for="departure-time"> Seleziona un orario di partenza:</label>
-    <input type="time" name="departure-time" id="departure-time">
+            <div class="border rounded border-dark-subtle p-2 " style="width: fit-content;">
+                <span class="fw-bold fs-5 me-2">A</span>
+                <select name="arrival" id="arriving-station" class="border-0 fs-5">
+                    <option value="" disabled selected class="text-white">Inserisci città</option>
+                    <option value="Milano">Milano</option>
+                    <option value="Bologna">Bologna</option>
+                    <option value="Roma">Roma</option>
+                    <option value="Napoli">Napoli</option>
+                    <option value="Villa S.Giovanni">Villa S.Giovanni</option>
+                </select>
+            </div>
+        </div>
 
-    <!-- <label for="passenger_number"> Seleziona il numero di passeggeri:</label>
+
+        <div class="border rounded border-dark-subtle p-2 " style="width: fit-content;">
+            <input type="date" name="date" id="date" class="border-0 fs-5">
+        </div>
+
+        <div class="border rounded border-dark-subtle p-2 " style="width: fit-content;">
+            <input type="time" name="departure-time" id="departure-time" class="border-0 fs-5">
+        </div>
+
+        <button id="button" class="text-white border-0 px-5 py-1">
+            <span class="me-2">Cerca</span>
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+
+
+
+        <!-- <label for="passenger_number"> Seleziona il numero di passeggeri:</label>
     <i class="fa-solid fa-circle-plus" id="plus"></i>
     <input type="text" name="passenger_number" id="passenger_number" value="1" disabled style="width: 50px">
     <i class="fa-solid fa-circle-minus" id="minus"></i> -->
 
-    <!-- <label for="elder_number"> Seleziona il numero di passeggeri anziani (over65):</label>
+        <!-- <label for="elder_number"> Seleziona il numero di passeggeri anziani (over65):</label>
     <i class="fa-solid fa-circle-plus" id="elder_plus"></i>
     <input type="text" name="elder_number" id="elder_number" value="0" disabled style="width: 50px">
     <i class="fa-solid fa-circle-minus" id="elder_minus"></i> -->
 
 
 
-    <!-- <div class="slidecontainer">
+        <!-- <div class="slidecontainer">
         <label for="myRange"> Solo andata: </label>
         <input type="range" min="1" max="2" value="51" class="slider" id="myRange" style="width: 50px">
     </div> -->
-    <button id="button">
-        Cerca
-    </button>
 
-    <div class="recap mt-4">
+    </div>
+
+    <div id="carouselExampleIndicators" class="carousel slide">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+                aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active ">
+                <figure class="w-100 position-relative">
+                    <img src="img/rome2.jpg" class="w-100" alt="">
+                    <h2 class="position-absolute text-light text-bg-dark p-2 top-50 start-50 fs-2"> TRENI PER ROMA A
+                        PARTIRE
+                        DA 25 €
+                    </h2>
+                </figure>
+
+
+
+            </div>
+            <div class="carousel-item">
+                <figure class="w-100 position-relative">
+                    <img src="img/naples.jpg" class="w-100" alt="">
+                    <h2 class="position-absolute text-light text-bg-dark p-2 top-50 start-50 fs-2"> VOGLIA DI PIZZA?
+                        TRENI PER NAPOLI A MENO DI 30 €
+                    </h2>
+                </figure>
+            </div>
+            <div class="carousel-item">
+                <figure class="w-100 position-relative">
+                    <img src="img/xmas.jpg" class="w-100" alt="">
+                    <h2 class="position-absolute text-light text-bg-dark p-2 top-50 start-50 fs-2 text-center">
+                        APPROFITTA DELLO
+                        SCONTO DI NATALE, USA IL CODICE XMAS23 PER OTTENERE UNO SCONTO DEL 10%
+                    </h2>
+                </figure>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+
+    <div class="recap mt-4 d-none">
         <h3>
             RECAP DETTAGLI TRENO:
         </h3>

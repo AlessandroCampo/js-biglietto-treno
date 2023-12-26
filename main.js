@@ -43,6 +43,7 @@ let arrivalCoords = {
 
 const price_multiplier = 0.21;
 let button = document.getElementById("button")
+let switch_button = document.getElementById("switch")
 let starting_station = document.getElementById("starting-station")
 let arrival_station = document.getElementById("arriving-station")
 let date_selector = document.getElementById("name")
@@ -206,6 +207,13 @@ button.addEventListener("click", () => {
 
 })
 
+switch_button.addEventListener("click", () => {
+    let start_station = starting_station.value
+    let arr_station = arrival_station.value
+    starting_station.value = arr_station
+    arrival_station.value = start_station
+})
+
 function calcDistance() {
     let startingLat = degreesToRadians(startCoords.latitude);
     let startingLong = degreesToRadians(startCoords.longitude);
@@ -306,6 +314,7 @@ function generateForm() {
     let ticket_img_seat = document.getElementById("ticket_seat")
     let ticket_img_seat2 = document.getElementById("ticket_seat2")
     hour_info.innerText = event.target.getAttribute("data-ticket_time")
+
     form.classList.remove("d-none")
     class_selection.addEventListener("change", calcPrice)
     birth_date_selection.addEventListener("change", calcPrice)
