@@ -1,6 +1,17 @@
 header,
-#button {
+#button,
+.btn-myColor,
+.btn-primary {
     background-color: rgb(46, 130, 158);
+}
+
+.btn-primary {
+    border: 0;
+}
+
+.btn-primary:hover {
+    background-color: rgb(80, 168, 198);
+    ;
 }
 
 select {
@@ -16,6 +27,15 @@ select {
 
 .carousel-inner h2 {
     transform: translate(-50%, -50%);
+}
+
+#submit:hover {
+    color: black;
+}
+
+nav li:hover {
+    text-decoration: underline;
+    color: white;
 }
 
 

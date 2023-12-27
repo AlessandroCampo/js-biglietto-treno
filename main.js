@@ -76,6 +76,13 @@ let time_distance = "0:00"
 let ticket_price = 0
 let passenger_birth_date = document.getElementById("passenger_birth_date")
 let submit_button = document.getElementById("submit")
+let carousel = document.getElementById("carousel")
+let form_container = document.getElementById("form-container")
+let ticket_img = document.getElementById("ticket_img")
+let logo = document.getElementById("logo")
+logo.addEventListener("click", () => {
+    location.reload()
+})
 dep_day.setAttribute("min", currentFullDate)
 dep_day.setAttribute("max", currentFullDateNextYear)
 passenger_birth_date.setAttribute("max", currentFullDate)
@@ -134,6 +141,8 @@ function degreesToRadians(degrees) {
 
 button.addEventListener("click", () => {
 
+    form_container.classList.add("d-none")
+    ticket_img.classList.add("d-none")
 
     if (starting_station.value == "Napoli") {
         startCoords.latitude = naples.latitude
@@ -297,7 +306,6 @@ function generateForm() {
     let birth_date_selection = document.getElementById("passenger_birth_date")
     let form = document.querySelector("form")
 
-    let ticket_img = document.getElementById("ticket_img")
     let ticket_img_name = document.getElementById("full_name")
     let ticket_img_name2 = document.getElementById("full_name2")
     let ticket_img_type = document.getElementById("ticket_type")
@@ -313,19 +321,25 @@ function generateForm() {
     let ticket_img_carriage2 = document.getElementById("ticket_carriage2")
     let ticket_img_seat = document.getElementById("ticket_seat")
     let ticket_img_seat2 = document.getElementById("ticket_seat2")
+
+
+
     hour_info.innerText = event.target.getAttribute("data-ticket_time")
 
-    form.classList.remove("d-none")
+    form_container.classList.remove("d-none")
     class_selection.addEventListener("change", calcPrice)
-    birth_date_selection.addEventListener("change", calcPrice)
+    birth_date_selection.addEventListener("focusout", calcPrice)
     form.addEventListener("submit", (e) => {
+
+
         let passenger_name = document.getElementById("passenger_fname").value
         let passenger_lname = document.getElementById("passenger_lname").value
         let selected_class = document.getElementById("ticket_class").value
         e.preventDefault()
         console.log("ciao")
-        form.classList.add("d-none")
+        form_container.classList.add("d-none")
         ticket_img.classList.remove("d-none")
+
         ticket_img_name.innerText = `${passenger_name} ${passenger_lname}`
         ticket_img_name2.innerText = `${passenger_name} ${passenger_lname}`
         ticket_img_type.innerText = selected_class
@@ -341,7 +355,7 @@ function generateForm() {
         let random_carriage = Math.floor(Math.random() * 15) + 1
         let letters = ["A", "B", "C", "D", "E", "F"]
         let random_letter = letters[Math.floor(Math.random() * letters.length)]
-        let random_seat = `${random_letter}${Math.floor(Math.random() * 130)}`
+        let random_seat = `${random_letter}${Math.floor((Math.random() * 20) + 1)}`
         ticket_img_carriage.innerText = random_carriage
         ticket_img_carriage2.innerText = random_carriage
         ticket_img_seat.innerText = random_seat
@@ -357,6 +371,7 @@ function generateTimeTables() {
     let table_body = document.getElementById("table_body")
     let displayed_solutions = 0;
     trains_table.classList.remove("d-none")
+    carousel.classList.add("d-none")
     trs.forEach((tr) => table_body.removeChild(tr))
 
     calcDistance()
@@ -420,6 +435,9 @@ function generateTimeTables() {
             select_button.classList.add("btn.btn-primary.select-button")
             select_button.setAttribute("data-ticket_time", time_dep_arr.innerText)
             select_button.innerText = "Seleziona"
+            select_button.classList.add("btn-myColor")
+            select_button.classList.add("border-0")
+            select_button.style.color = "white"
             select_button.addEventListener("click", generateForm)
             table_body.appendChild(train)
             train.appendChild(start_arrive)
@@ -458,7 +476,8 @@ function calcPrice() {
     if (event.target == class_selection) {
         switch (ticket_class) {
             case "economy":
-                final_ticket_price = starting_ticket_price
+                console.log(starting_ticket_price)
+                final_ticket_price = Number(starting_ticket_price)
                 if ((todayYear - passenger_birth_year < 18 && !passenger_birth_date == "")) {
                     final_ticket_price = final_ticket_price * 0.8
                 }
@@ -510,7 +529,8 @@ function calcPrice() {
         }
 
         else {
-            final_ticket_price = starting_ticket_price
+
+            final_ticket_price = Number(starting_ticket_price)
             price_info.innerText = final_ticket_price.toFixed(2)
         }
 

@@ -16,8 +16,12 @@
 
 <header class="py-2">
     <nav class="navbar w-75 mx-auto d-flex gap-3 justify-content-between align-items-center">
-        <figure style="width: fit-content;" class="align-self-center">
-            <img src="img/logo-removebg-preview.png" alt="">
+        <figure style="width: fit-content;" class="align-self-center" id="logo">
+            <a href="#
+            ">
+                <img src="img/logo-removebg-preview.png" alt="">
+            </a>
+
         </figure>
         <ul class="d-flex gap-3 list-unstyled align-items-center">
             <li>
@@ -118,7 +122,7 @@
             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
                 aria-label="Slide 3"></button>
         </div>
-        <div class="carousel-inner">
+        <div class="carousel-inner" id="carousel">
             <div class="carousel-item active ">
                 <figure class="w-100 position-relative">
                     <img src="img/rome2.jpg" class="w-100" alt="">
@@ -162,29 +166,7 @@
     </div>
 
 
-    <div class="recap mt-4 d-none">
-        <h3>
-            RECAP DETTAGLI TRENO:
-        </h3>
-        <ul>
-            <li>
-                Tratta selezionata: <span id="path"></span>
-            </li>
-            <li>
-                Orario selezionato: <span id="chosen_time"></span>
-            </li>
-            <li>
-                Distanza: <span id="distance_travelled"></span>
-            </li>
-            <!-- <li>
-                Numero passeggeri: <span id="passengers_number"></span>
-            </li> -->
-            <li class="fw-bold fs-4">
-                Prezzo biglietto: <span id="ticket_price"></span>
-            </li>
 
-        </ul>
-    </div>
 
 
     <table class="table d-none text-center" id="trains">
@@ -203,9 +185,9 @@
         </tbody>
     </table>
 
-    <div id="form-container">
-        <form class="w-50 p-3 d-none">
-            <h3> Inserire i dati del passeggero: </h3>
+    <div id="form-container" class="d-flex justify-content-center gap-3 d-none">
+        <form class="w-50 px-3" action="ticket.html" method="get">
+            <h3 class="text-center"> Inserire i dati del passeggero: </h3>
             <div class="form-group py-3">
                 <label for="passenger_mail">Indirizzo Email</label>
                 <input type="email" class="form-control" id="passenger_mail" placeholder="Enter email" required>
@@ -251,20 +233,39 @@
                 <label class="form-check-label" for="exampleCheck1">Check me out</label>
             </div>
 
-            <button type="submit" id="submit" class="btn btn-primary">Conferma i dati e genera il biglietto</button>
+            <button type="submit" id="submit" class="btn btn-primary text-white">Conferma i dati e genera il
+                biglietto</button>
         </form>
+
+        <div class="recap mt-5 ms
+        -5 align-self-center">
+            <h3>
+                RECAP DETTAGLI TRENO:
+            </h3>
+            <ul>
+                <li>
+                    Tratta selezionata: <span id="path"></span>
+                </li>
+                <li>
+                    Orario selezionato: <span id="chosen_time"></span>
+                </li>
+                <li>
+                    Distanza: <span id="distance_travelled"></span>
+                </li>
+                <!-- <li>
+                    Numero passeggeri: <span id="passengers_number"></span>
+                </li> -->
+                <li class="fw-bold fs-4">
+                    Prezzo biglietto: <span id="ticket_price"></span> €
+                </li>
+
+            </ul>
+        </div>
+
     </div>
 
 
-
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
-    <script src="main.js"></script>
-
-    <figure class="d-none" id="ticket_img">
+    <figure class="d-none mx-auto" id="ticket_img">
         <img src="img/Blank-Train-Ticket-Template-2.jpg" alt="">
         <p id="full_name">
             Alessandro Campo
@@ -331,6 +332,15 @@
             12
         </p>
     </figure>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="main.js"></script>
+
 
 
 </body>
